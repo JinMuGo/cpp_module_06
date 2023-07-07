@@ -1,0 +1,20 @@
+name: Build
+
+on:
+  push:
+    branches: 
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and test
+        run: |
+          git submodule update --init
+          docker build -t my-image .
+          docker run my-image
