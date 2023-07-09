@@ -6,7 +6,7 @@
 /*   By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 09:04:49 by jgo               #+#    #+#             */
-/*   Updated: 2023/07/09 12:03:20 by jgo              ###   ########.fr       */
+/*   Updated: 2023/07/09 15:59:36 by jgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 #include <iostream>
 #include <limits>
+#include <cstdlib>
 #include "color.h"
-
-#define ERR_ARGS "❌ Incorrect number of arguments\n"
 
 #endif
