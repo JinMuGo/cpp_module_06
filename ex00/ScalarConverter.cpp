@@ -6,11 +6,29 @@
 /*   By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 09:04:46 by jgo               #+#    #+#             */
-/*   Updated: 2023/07/09 19:03:10 by jgo              ###   ########.fr       */
+/*   Updated: 2023/07/10 19:43:41 by jgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
+
+ScalarConverter::ScalarConverter() {
+	std::cout << SC_DFLT_CTOR << std::endl;
+}
+ScalarConverter::ScalarConverter(const ScalarConverter& obj) {
+	std::cout << SC_CPY_CTOR << std::endl;
+	*this = obj;
+}
+ScalarConverter::~ScalarConverter() {
+	std::cout << SC_DTOR << std::endl;
+}
+
+ScalarConverter& ScalarConverter::operator=(const ScalarConverter& obj) {
+	std::cout << SC_CPY_ASGMT_OP_CALL << std::endl;
+	if (this != &obj)
+		return *this;
+	return *this;
+}
 
 bool ScalarConverter::isPrintChar(const int c) {
 	return (' ' <= c && c <= '~');
@@ -30,9 +48,20 @@ void ScalarConverter::error(t_err err) {
 bool ScalarConverter::checkArgs(const std::string& str, const t_scalar& scalar, const char* endptr) {
 	if (scalar.d == 0 && (str[0] != '-' && str[0] != '+') && isdigit(str[0]) == false)
 		return (true);
-	if  (endptr[0] != 'f' && endptr[0])
+	if (endptr[0] && endptr[0] != 'f' || endptr[1])
 		return (true);
 	return (false);
+}
+
+t_type ScalarConverter::judgeType(const t_scalar &scalar)
+{
+
+}
+
+//floating point exception
+void ScalarConverter::fpe(t_scalar &scalar)
+{
+
 }
 
 void ScalarConverter::convert(const std::string& str) {
@@ -42,6 +71,7 @@ void ScalarConverter::convert(const std::string& str) {
 
 	if (ScalarConverter::checkArgs(str, scalar, endptr))
 		ScalarConverter::error(ERR_INPUT);
+
 }
 
 const char* ScalarConverter::InvalidInputException::what() const throw() {

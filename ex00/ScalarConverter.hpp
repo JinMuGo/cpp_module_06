@@ -6,7 +6,7 @@
 /*   By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 09:04:46 by jgo               #+#    #+#             */
-/*   Updated: 2023/07/09 16:03:50 by jgo              ###   ########.fr       */
+/*   Updated: 2023/07/10 19:42:42 by jgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,14 @@
 class ScalarConverter {
    private:
 	static bool isPrintChar(const int c);
+	ScalarConverter();
+	ScalarConverter(const ScalarConverter& obj);
+	~ScalarConverter();
+	ScalarConverter& operator=(const ScalarConverter& obj);
 
    public:
 	typedef enum e_err { ERR_ARGS, ERR_INPUT } t_err;
+	typedef enum e_type {FPE, INT, FLOAT, DOUBLE, CHAR} t_type;
 	typedef struct s_scalar {
 		char c;
 		int i;
@@ -32,6 +37,9 @@ class ScalarConverter {
 	static void convert(const std::string& str);
 	static bool checkArgs(const std::string& str, const t_scalar& scalar, const char *endptr);
 	static void error(t_err err);
+	static t_type judgeType(const t_scalar &scalar);
+	static void fpe(t_scalar &scalar);
+
 
 	class InvalidInputException : public std::exception {
 	   public:
