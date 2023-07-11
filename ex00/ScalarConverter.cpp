@@ -6,7 +6,7 @@
 /*   By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 09:04:46 by jgo               #+#    #+#             */
-/*   Updated: 2023/07/10 19:43:41 by jgo              ###   ########.fr       */
+/*   Updated: 2023/07/11 13:43:58 by jgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& obj) {
 	return *this;
 }
 
-bool ScalarConverter::isPrintChar(const int c) {
-	return (' ' <= c && c <= '~');
-}
-
 void ScalarConverter::error(t_err err) {
 	switch (err) {
 		case ERR_ARGS:
@@ -45,33 +41,17 @@ void ScalarConverter::error(t_err err) {
 	}
 }
 
-bool ScalarConverter::checkArgs(const std::string& str, const t_scalar& scalar, const char* endptr) {
-	if (scalar.d == 0 && (str[0] != '-' && str[0] != '+') && isdigit(str[0]) == false)
-		return (true);
-	if (endptr[0] && endptr[0] != 'f' || endptr[1])
-		return (true);
-	return (false);
-}
-
-t_type ScalarConverter::judgeType(const t_scalar &scalar)
-{
-
-}
-
-//floating point exception
-void ScalarConverter::fpe(t_scalar &scalar)
-{
-
-}
-
-void ScalarConverter::convert(const std::string& str) {
+void ScalarConverter::convert(std::string str) {
 	char* endptr = NULL;
 	const double d = strtod(str.c_str(), &endptr);
 	const t_scalar scalar = {static_cast<char>(d), static_cast<int>(d), static_cast<float>(d), d};
+	const t_type type = ScalarConverter::JudgeType::judgeType(scalar, str, endptr);
 
-	if (ScalarConverter::checkArgs(str, scalar, endptr))
+	if (type == NONE)
 		ScalarConverter::error(ERR_INPUT);
-
+	if (type == FPE)
+		ScalarConverter::PrintScalar::printFpe(str);
+	ScalarConverter::PrintScalar::printScalar(scalar, type);
 }
 
 const char* ScalarConverter::InvalidInputException::what() const throw() {

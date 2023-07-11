@@ -6,7 +6,7 @@
 /*   By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 09:04:46 by jgo               #+#    #+#             */
-/*   Updated: 2023/07/10 19:42:42 by jgo              ###   ########.fr       */
+/*   Updated: 2023/07/11 14:08:56 by jgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,62 @@
 // https://www.tutorialspoint.com/how-to-create-a-static-class-in-cplusplus#:~:text=There%20is%20no%20such%20thing,of%20objects%20of%20the%20class.
 class ScalarConverter {
    private:
-	static bool isPrintChar(const int c);
+	// OCF
 	ScalarConverter();
 	ScalarConverter(const ScalarConverter& obj);
 	~ScalarConverter();
 	ScalarConverter& operator=(const ScalarConverter& obj);
 
-   public:
-	typedef enum e_err { ERR_ARGS, ERR_INPUT } t_err;
-	typedef enum e_type {FPE, INT, FLOAT, DOUBLE, CHAR} t_type;
+	typedef enum e_type { NONE, FPE, CHAR, INT, FLOAT, DOUBLE } t_type;
 	typedef struct s_scalar {
-		char c;
-		int i;
-		float f;
-		double d;
+		char	c;
+		int		i;
+		float	f;
+		double	d;
 	} t_scalar;
 
-	static void convert(const std::string& str);
-	static bool checkArgs(const std::string& str, const t_scalar& scalar, const char *endptr);
-	static void error(t_err err);
-	static t_type judgeType(const t_scalar &scalar);
-	static void fpe(t_scalar &scalar);
 
+
+	class JudgeType {
+	   private:
+		// OCF
+		JudgeType();
+		JudgeType(const JudgeType& obj);
+		~JudgeType();
+		JudgeType& operator=(const JudgeType& obj);
+
+		typedef ScalarConverter::t_type (*t_judge_type)(const t_scalar&, std::string, char*);
+		static ScalarConverter::t_type isFpe(std::string str);
+		static ScalarConverter::t_type isChar(const t_scalar& scalar, std::string str, char* endptr);
+		static ScalarConverter::t_type isInt(const t_scalar& scalar, std::string str, char* endptr);
+		static ScalarConverter::t_type isFloat(const t_scalar& scalar, std::string str, char* endptr);
+		static ScalarConverter::t_type isDouble(const t_scalar& scalar, std::string str, char* endptr);
+
+	   public:
+		static ScalarConverter::t_type judgeType(const t_scalar& scalar, std::string str, char* endptr);
+	};
+
+	class PrintScalar {
+	   private:
+		// OCF
+		PrintScalar();
+		PrintScalar(const PrintScalar& obj);
+		~PrintScalar();
+		PrintScalar& operator=(const PrintScalar& obj);
+
+		static void	printNonDisplayable(void);
+		static void	printImpossible(void);
+		static void printType(const t_type &type);
+
+		static void printScalar(const char& scalar);
+		static void printScalar(const int& scalar);
+		static void printScalar(const float& scalar);
+		static void printScalar(const double& scalar);
+
+	   public:
+		static void printScalar(const t_scalar& scalar, const t_type& type);
+		static void printFpe(const std::string &str);
+	};
 
 	class InvalidInputException : public std::exception {
 	   public:
@@ -50,6 +84,11 @@ class ScalarConverter {
 	   public:
 		virtual const char* what() const throw();
 	};
+
+   public:
+	typedef enum e_err { ERR_ARGS, ERR_INPUT } t_err;
+	static void convert(std::string str);
+	static void error(t_err err);
 };
 
 #endif
