@@ -6,7 +6,7 @@
 /*   By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 09:04:46 by jgo               #+#    #+#             */
-/*   Updated: 2023/07/11 13:43:58 by jgo              ###   ########.fr       */
+/*   Updated: 2023/07/11 21:07:14 by jgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ void ScalarConverter::convert(std::string str) {
 	if (type == NONE)
 		ScalarConverter::error(ERR_INPUT);
 	if (type == FPE)
-		ScalarConverter::PrintScalar::printFpe(str);
-	ScalarConverter::PrintScalar::printScalar(scalar, type);
+		ScalarConverter::PrintScalar::printFpe(str, scalar.d);
+	else
+		ScalarConverter::PrintScalar::printScalar(scalar, type);
 }
 
 const char* ScalarConverter::InvalidInputException::what() const throw() {

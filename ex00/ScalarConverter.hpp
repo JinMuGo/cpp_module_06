@@ -6,7 +6,7 @@
 /*   By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 09:04:46 by jgo               #+#    #+#             */
-/*   Updated: 2023/07/11 14:08:56 by jgo              ###   ########.fr       */
+/*   Updated: 2023/07/11 21:06:23 by jgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,11 @@ class ScalarConverter {
 
 	typedef enum e_type { NONE, FPE, CHAR, INT, FLOAT, DOUBLE } t_type;
 	typedef struct s_scalar {
-		char	c;
-		int		i;
-		float	f;
-		double	d;
+		char c;
+		int i;
+		float f;
+		double d;
 	} t_scalar;
-
-
 
 	class JudgeType {
 	   private:
@@ -43,7 +41,7 @@ class ScalarConverter {
 		JudgeType& operator=(const JudgeType& obj);
 
 		typedef ScalarConverter::t_type (*t_judge_type)(const t_scalar&, std::string, char*);
-		static ScalarConverter::t_type isFpe(std::string str);
+		static ScalarConverter::t_type isFpe(std::string str, const double& scalar);
 		static ScalarConverter::t_type isChar(const t_scalar& scalar, std::string str, char* endptr);
 		static ScalarConverter::t_type isInt(const t_scalar& scalar, std::string str, char* endptr);
 		static ScalarConverter::t_type isFloat(const t_scalar& scalar, std::string str, char* endptr);
@@ -61,18 +59,18 @@ class ScalarConverter {
 		~PrintScalar();
 		PrintScalar& operator=(const PrintScalar& obj);
 
-		static void	printNonDisplayable(void);
-		static void	printImpossible(void);
-		static void printType(const t_type &type);
+		static void printNonDisplayable(void);
+		static void printImpossible(void);
+		static void printType(const t_type& type);
 
-		static void printScalar(const char& scalar);
-		static void printScalar(const int& scalar);
-		static void printScalar(const float& scalar);
-		static void printScalar(const double& scalar);
+		static void printScalar(const char& scalar, const t_type& type);
+		static void printScalar(const int& scalar, const t_type& type);
+		static void printScalar(const float& scalar, const t_type& type);
+		static void printScalar(const double& scalar, const t_type& type);
 
 	   public:
 		static void printScalar(const t_scalar& scalar, const t_type& type);
-		static void printFpe(const std::string &str);
+		static void printFpe(std::string str, const double &scalar);
 	};
 
 	class InvalidInputException : public std::exception {

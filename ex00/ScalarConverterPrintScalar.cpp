@@ -6,7 +6,7 @@
 /*   By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 12:38:40 by jgo               #+#    #+#             */
-/*   Updated: 2023/07/11 14:07:43 by jgo              ###   ########.fr       */
+/*   Updated: 2023/07/11 21:07:26 by jgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void ScalarConverter::PrintScalar::printImpossible(void) {
 	std::cout << "Impossible" << std::endl;
 };
 
-void ScalarConverter::PrintScalar::printFpe(const std::string& str) {
+void ScalarConverter::PrintScalar::printFpe(std::string str, const double &scalar) {
 	const std::string fpes[][5] = {
 		{"+inff", "impossible", "impossible", "inff", "inf"},	{"inff", "impossible", "impossible", "inff", "inf"},
 		{"-inff", "impossible", "impossible", "-inff", "-inf"}, {"nanf", "impossible", "impossible", "nanf", "nan"},
@@ -41,6 +41,11 @@ void ScalarConverter::PrintScalar::printFpe(const std::string& str) {
 	const std::string(*begin)[5] = fpes;
 	const std::string(*end)[5] = fpes + sizeof(fpes) / sizeof(fpes[0]);
 
+	printType(FPE);
+	if (std::isnan(scalar))
+		str = "nan";
+	if (std::isinf(scalar))
+		str = "inf";
 	for (std::string(*it)[5] = const_cast<std::string(*)[5]>(begin); it != end; ++it) {
 		if (str.compare((*it)[0]) == 0)
 		{
@@ -53,10 +58,20 @@ void ScalarConverter::PrintScalar::printFpe(const std::string& str) {
 	}
 }
 
-void ScalarConverter::PrintScalar::printScalar(const char& scalar){};
-void ScalarConverter::PrintScalar::printScalar(const int& scalar){};
-void ScalarConverter::PrintScalar::printScalar(const float& scalar){};
-void ScalarConverter::PrintScalar::printScalar(const double& scalar){};
+void ScalarConverter::PrintScalar::printScalar(const char& scalar, const t_type &type){
+	if (std::isprint(scalar) || type == CHAR)
+		std::cout << "char: " << scalar << std::endl;
+	else
+		printNonDisplayable();
+};
+void ScalarConverter::PrintScalar::printScalar(const int& scalar, const t_type &type){
+	if (type == INT)
+		std::cout << "int: " << scalar << std::endl;
+	else
+		printNonDisplayable();
+};
+void ScalarConverter::PrintScalar::printScalar(const float& scalar, const t_type &type){};
+void ScalarConverter::PrintScalar::printScalar(const double& scalar, const t_type &type){};
 
 void ScalarConverter::PrintScalar::printType(const t_type &type){
 	const std::string	types[] = {"Floating Point Execption", "Char", "Int", "Float", "Double"};
@@ -66,7 +81,11 @@ void ScalarConverter::PrintScalar::printType(const t_type &type){
 
 void ScalarConverter::PrintScalar::printScalar(const t_scalar& scalar, const t_type& type) {
 	printType(type);
-		
+
+	printScalar(scalar.c, type);
+	printScalar(scalar.i, type);
+	printScalar(scalar.f, type);
+	printScalar(scalar.d, type);
 }
 // 흠... 어떻게 처리하는게 좋을까..... 일단 t_scalar의 type을 알았는ㄷ....
 // scalar의 field들을 모두 순회하면서 print하면 되지 않을까.

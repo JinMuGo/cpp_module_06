@@ -6,7 +6,7 @@
 /*   By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 09:04:49 by jgo               #+#    #+#             */
-/*   Updated: 2023/07/10 16:07:28 by jgo              ###   ########.fr       */
+/*   Updated: 2023/07/11 20:35:28 by jgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@
 #include <iostream>
 #include <limits>
 #include <cstdlib>
+#include <iomanip>
+#include <cmath>
 #include "color.h"
+
+#define EPSION 1e-6
 
 #define SC_DFLT_CTOR GREEN "- ScalarConverter: Default constructor called" RESET
 #define SC_CTOR DARK_GREEN "- ScalarConverter: constructor called" RESET
