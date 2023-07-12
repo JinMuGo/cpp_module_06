@@ -5,27 +5,21 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/11/23 14:05:59 by jgo               #+#    #+#              #
-#    Updated: 2023/07/12 15:19:04 by jgo              ###   ########.fr        #
+#    Created: 2023/04/07 19:34:14 by jgo               #+#    #+#              #
+#    Updated: 2023/07/12 15:08:11 by jgo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-include ./make_config/Rules.mk
-include ./make_config/Color_Rules.mk
+include ../make_config/Rules.mk
+include ../make_config/Color_Rules.mk
 
-PROJECT_NAME := cpp_module_06
+SRCS := Serializer.cpp \
+		main.cpp
 
-DIRS := ex00 ex01
+NAME :=	serialization
 
-$(DIRS):
-	$(MAKE) -C $@
+OBJS := $(SRCS:.cpp=.o)
+DEPS := $(SRCS:.cpp=.d)
+-include $(DEPS)
 
-all bonus:
-	$(Q)$(call color_printf,$(YELLOW),$(PROJECT_NAME),🎯 Start compiling)
-	$(MAKE) $(DIRS)
-	$(Q)$(call color_printf,$(GREEN),$(PROJECT_NAME),✨ compiled!)
-
-fclean clean re:
-	$(Q)$(foreach dir, $(DIRS), $(MAKE) -C $(dir) $@;)
-
-.PHONY: all clean fclean re bonus $(DIRS)
+include ../make_config/Recipes.mk
