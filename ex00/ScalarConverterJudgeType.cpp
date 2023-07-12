@@ -6,7 +6,7 @@
 /*   By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 12:02:03 by jgo               #+#    #+#             */
-/*   Updated: 2023/07/11 21:03:29 by jgo              ###   ########.fr       */
+/*   Updated: 2023/07/12 10:38:19 by jgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ ScalarConverter::JudgeType& ScalarConverter::JudgeType::operator=(const ScalarCo
 	return *this;
 }
 
-ScalarConverter::t_type ScalarConverter::JudgeType::isFpe(std::string str, const double &scalar) {
+ScalarConverter::t_type ScalarConverter::JudgeType::isFpe(std::string str, const double& scalar) {
 	const std::string fpes[] = {"+inff", "inff", "-inff", "nanf", "+inf", "inf", "-inf", "nan"};
 	const std::string* begin = fpes;
 	const std::string* end = fpes + sizeof(fpes) / sizeof(fpes[0]);
@@ -44,7 +44,9 @@ ScalarConverter::t_type ScalarConverter::JudgeType::isChar(const t_scalar& scala
 	return (CHAR);
 }
 ScalarConverter::t_type ScalarConverter::JudgeType::isInt(const t_scalar& scalar, std::string str, char* endptr) {
-	if (scalar.d != scalar.i || endptr[0] || str.length() > 11)
+	const std::string::size_type dot = str.find_first_of(".");
+
+	if (scalar.d != scalar.i || endptr[0] || str.length() > 11 || dot != std::string::npos)
 		return (NONE);
 	return (INT);
 }
@@ -57,7 +59,8 @@ ScalarConverter::t_type ScalarConverter::JudgeType::isDouble(const t_scalar& sca
 	const std::string::size_type forward = str.find_first_of(".");
 	const std::string::size_type backward = str.find_last_of(".");
 
-	if (forward != backward || endptr[0] || std::abs(scalar.d - scalar.f) > EPSION)
+	static_cast<void>(scalar);
+	if (forward != backward || endptr[0])
 		return (NONE);
 	return (DOUBLE);
 }

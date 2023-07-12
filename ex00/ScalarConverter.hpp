@@ -6,7 +6,7 @@
 /*   By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 09:04:46 by jgo               #+#    #+#             */
-/*   Updated: 2023/07/11 21:06:23 by jgo              ###   ########.fr       */
+/*   Updated: 2023/07/12 10:09:17 by jgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,21 @@ class ScalarConverter {
 
 	class PrintScalar {
 	   private:
+	   	const static std::string _types[5];
+
 		// OCF
 		PrintScalar();
 		PrintScalar(const PrintScalar& obj);
 		~PrintScalar();
 		PrintScalar& operator=(const PrintScalar& obj);
 
-		static void printNonDisplayable(void);
-		static void printImpossible(void);
+		static void printNonDisplayable(const t_type &type);
+		static void printImpossible(const t_type &type);
 		static void printType(const t_type& type);
-
-		static void printScalar(const char& scalar, const t_type& type);
-		static void printScalar(const int& scalar, const t_type& type);
-		static void printScalar(const float& scalar, const t_type& type);
-		static void printScalar(const double& scalar, const t_type& type);
 
 	   public:
 		static void printScalar(const t_scalar& scalar, const t_type& type);
+		static void printChar(const char& scalar);
 		static void printFpe(std::string str, const double &scalar);
 	};
 
@@ -87,6 +85,8 @@ class ScalarConverter {
 	typedef enum e_err { ERR_ARGS, ERR_INPUT } t_err;
 	static void convert(std::string str);
 	static void error(t_err err);
+	
 };
+
 
 #endif

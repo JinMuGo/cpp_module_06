@@ -6,7 +6,7 @@
 /*   By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 09:04:49 by jgo               #+#    #+#             */
-/*   Updated: 2023/07/11 20:35:28 by jgo              ###   ########.fr       */
+/*   Updated: 2023/07/12 10:16:49 by jgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <cstdlib>
 #include <iomanip>
 #include <cmath>
+#include <climits>
 #include "color.h"
 
 #define EPSION 1e-6

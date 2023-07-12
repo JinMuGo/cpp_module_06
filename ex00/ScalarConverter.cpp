@@ -6,7 +6,7 @@
 /*   By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 09:04:46 by jgo               #+#    #+#             */
-/*   Updated: 2023/07/11 21:07:14 by jgo              ###   ########.fr       */
+/*   Updated: 2023/07/12 10:10:52 by jgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,20 @@ void ScalarConverter::convert(std::string str) {
 	const t_scalar scalar = {static_cast<char>(d), static_cast<int>(d), static_cast<float>(d), d};
 	const t_type type = ScalarConverter::JudgeType::judgeType(scalar, str, endptr);
 
-	if (type == NONE)
-		ScalarConverter::error(ERR_INPUT);
-	if (type == FPE)
-		ScalarConverter::PrintScalar::printFpe(str, scalar.d);
-	else
-		ScalarConverter::PrintScalar::printScalar(scalar, type);
+	switch (type) {
+		case NONE:
+			ScalarConverter::error(ERR_INPUT);
+			break;
+		case FPE:
+			ScalarConverter::PrintScalar::printFpe(str, scalar.d);
+			break;
+		case CHAR:
+			ScalarConverter::PrintScalar::printChar(str[0]);
+			break;
+		default:
+			ScalarConverter::PrintScalar::printScalar(scalar, type);
+			break;
+	}
 }
 
 const char* ScalarConverter::InvalidInputException::what() const throw() {
