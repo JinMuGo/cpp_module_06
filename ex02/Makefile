@@ -6,14 +6,14 @@
 #    By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 19:34:14 by jgo               #+#    #+#              #
-#    Updated: 2023/07/15 10:19:51 by jgo              ###   ########.fr        #
+#    Updated: 2023/07/18 13:45:13 by jgo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 include ../make_config/Color.mk
+include ../make_config/Rules.mk
 include ../make_config/Funcs.mk
 include ../make_config/Flags.mk
-include ../make_config/Rules.mk
 
 SRCS := Base.cpp \
 		A.cpp \
