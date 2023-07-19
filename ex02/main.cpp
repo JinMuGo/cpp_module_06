@@ -6,7 +6,7 @@
 /*   By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 16:15:46 by jgo               #+#    #+#             */
-/*   Updated: 2023/07/12 16:53:47 by jgo              ###   ########.fr       */
+/*   Updated: 2023/07/19 16:53:15 by jgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@ void identify(Base* p) {
 void identify(Base& p) {
 	try {
 		A a = dynamic_cast<A&>(p);
-		std::cout << RED "the referebce type is A" << std::endl;
+		std::cout << RED "the reference type is A" << std::endl;
 	} catch (const std::bad_cast& e) {}
 	try {
 		B b = dynamic_cast<B&>(p);
-		std::cout << YELLOW "the referebce type is B" << std::endl;
+		std::cout << YELLOW "the reference type is B" << std::endl;
 	} catch (const std::bad_cast& e) {}
 	try {
 		C c = dynamic_cast<C&>(p);
-		std::cout << GREEN "the referebce type is C" << std::endl;
+		std::cout << GREEN "the reference type is C" << std::endl;
 	} catch (const std::bad_cast& e) {}
 }
 
@@ -76,6 +76,6 @@ int main(void) {
 	delete ptr;
 	delete ptr2;
 
-	system("leaks Identify_real_type");
+	//system("leaks Identify_real_type");
 	return (0);
 }
