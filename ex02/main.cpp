@@ -6,7 +6,7 @@
 /*   By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 16:15:46 by jgo               #+#    #+#             */
-/*   Updated: 2023/07/19 16:53:15 by jgo              ###   ########.fr       */
+/*   Updated: 2023/07/19 16:58:03 by jgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "B.hpp"
 #include "Base.hpp"
 #include "C.hpp"
+#include <cstdlib>
 
 Base::t_abc my_random(const int max) {
 	static bool flag = false;
@@ -53,15 +54,21 @@ void identify(Base& p) {
 	try {
 		A a = dynamic_cast<A&>(p);
 		std::cout << RED "the reference type is A" << std::endl;
-	} catch (const std::bad_cast& e) {}
+	} catch (const std::bad_cast& e) {
+		std::cerr << e.what() << '\n';
+	}
 	try {
 		B b = dynamic_cast<B&>(p);
 		std::cout << YELLOW "the reference type is B" << std::endl;
-	} catch (const std::bad_cast& e) {}
+	} catch (const std::bad_cast& e) {
+		std::cerr << e.what() << '\n';
+	}
 	try {
 		C c = dynamic_cast<C&>(p);
 		std::cout << GREEN "the reference type is C" << std::endl;
-	} catch (const std::bad_cast& e) {}
+	} catch (const std::bad_cast& e) {
+		std::cerr << e.what() << '\n';
+	}
 }
 
 int main(void) {
