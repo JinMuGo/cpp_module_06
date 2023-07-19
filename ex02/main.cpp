@@ -6,7 +6,7 @@
 /*   By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 16:15:46 by jgo               #+#    #+#             */
-/*   Updated: 2023/07/19 16:58:03 by jgo              ###   ########.fr       */
+/*   Updated: 2023/07/19 17:01:11 by jgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "Base.hpp"
 #include "C.hpp"
 #include <cstdlib>
+#include <typeinfo>
 
 Base::t_abc my_random(const int max) {
 	static bool flag = false;
