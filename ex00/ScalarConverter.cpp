@@ -6,7 +6,7 @@
 /*   By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 09:04:46 by jgo               #+#    #+#             */
-/*   Updated: 2023/07/12 10:10:52 by jgo              ###   ########.fr       */
+/*   Updated: 2023/07/20 17:24:26 by jgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& obj) {
 	return *this;
 }
 
-void ScalarConverter::error(t_err err) {
+void ScalarConverter::error(const t_err err) {
 	switch (err) {
 		case ERR_ARGS:
 			throw ScalarConverter::IncorrectNumberOfArgsException();
@@ -43,7 +43,7 @@ void ScalarConverter::error(t_err err) {
 
 void ScalarConverter::convert(std::string str) {
 	char* endptr = NULL;
-	const double d = strtod(str.c_str(), &endptr);
+	const double d = strtod(str.c_str(), &endptr); // error handling?
 	const t_scalar scalar = {static_cast<char>(d), static_cast<int>(d), static_cast<float>(d), d};
 	const t_type type = ScalarConverter::JudgeType::judgeType(scalar, str, endptr);
 

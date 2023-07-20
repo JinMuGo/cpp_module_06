@@ -6,7 +6,7 @@
 /*   By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:50:19 by jgo               #+#    #+#             */
-/*   Updated: 2023/07/12 16:01:54 by jgo              ###   ########.fr       */
+/*   Updated: 2023/07/20 17:25:22 by jgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "Serializer.hpp"
 
 static inline void decToBin(const uintptr_t d) {
-	for (int i = 31; i >= 0; i--) {
+	for (int i = 63; i >= 0; i--) {
 		int tmp = (d >> i) & true;
 		std::cout << tmp;
 	}

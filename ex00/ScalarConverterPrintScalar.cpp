@@ -6,7 +6,7 @@
 /*   By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 12:38:40 by jgo               #+#    #+#             */
-/*   Updated: 2023/07/12 14:05:29 by jgo              ###   ########.fr       */
+/*   Updated: 2023/07/20 17:33:03 by jgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void ScalarConverter::PrintScalar::printImpossible(const t_type& type) {
 	std::cout << _types[type - 1] << ": Impossible" << std::endl;
 };
 
-void ScalarConverter::PrintScalar::printFpe(std::string str, const double& scalar) {
+void ScalarConverter::PrintScalar::printFpe(std::string &str, const double& scalar) {
 	const std::string fpes[][5] = {
 		{"+inff", "impossible", "impossible", "inff", "inf"},	{"inff", "impossible", "impossible", "inff", "inf"},
 		{"-inff", "impossible", "impossible", "-inff", "-inf"}, {"nanf", "impossible", "impossible", "nanf", "nan"},
@@ -44,11 +44,11 @@ void ScalarConverter::PrintScalar::printFpe(std::string str, const double& scala
 	const std::string(*begin)[5] = fpes;
 	const std::string(*end)[5] = fpes + sizeof(fpes) / sizeof(fpes[0]);
 
-	printType(FPE);
+	//printType(FPE);
 	if (std::isnan(scalar))
 		str = "nan";
-	if (std::isinf(scalar))
-		str = "inf";
+ 	if (std::isinf(scalar))
+		str = scalar >= 0 ? "inf" : "-inf";
 	for (std::string(*it)[5] = const_cast<std::string(*)[5]>(begin); it != end; ++it) {
 		if (str.compare((*it)[0]) == 0) {
 			std::cout << "char: " << (*it)[1] << std::endl;
