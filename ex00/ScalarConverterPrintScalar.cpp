@@ -35,7 +35,7 @@ void ScalarConverter::PrintScalar::printImpossible(const t_type& type) {
 	std::cout << _types[type - 1] << ": Impossible" << std::endl;
 };
 
-void ScalarConverter::PrintScalar::printFpe(std::string &str, const double& scalar) {
+void ScalarConverter::PrintScalar::printFpe(std::string& str, const double& scalar) {
 	const std::string fpes[][5] = {
 		{"+inff", "impossible", "impossible", "inff", "inf"},	{"inff", "impossible", "impossible", "inff", "inf"},
 		{"-inff", "impossible", "impossible", "-inff", "-inf"}, {"nanf", "impossible", "impossible", "nanf", "nan"},
@@ -47,7 +47,7 @@ void ScalarConverter::PrintScalar::printFpe(std::string &str, const double& scal
 	//printType(FPE);
 	if (std::isnan(scalar))
 		str = "nan";
- 	if (std::isinf(scalar))
+	if (std::isinf(scalar))
 		str = scalar >= 0 ? "inf" : "-inf";
 	for (std::string(*it)[5] = const_cast<std::string(*)[5]>(begin); it != end; ++it) {
 		if (str.compare((*it)[0]) == 0) {
@@ -66,7 +66,7 @@ void ScalarConverter::PrintScalar::printType(const t_type& type) {
 
 void ScalarConverter::PrintScalar::printChar(const char& scalar) {
 	std::cout << "char: \'" << scalar << "\'" << std::endl;
-	std::cout << "int: " <<  static_cast<int>(scalar) << std::endl;
+	std::cout << "int: " << static_cast<int>(scalar) << std::endl;
 	std::cout << std::fixed << std::setprecision(1) << "float: " << static_cast<float>(scalar) << "f" << std::endl;
 	std::cout << std::fixed << std::setprecision(1) << "double: " << static_cast<double>(scalar) << std::endl;
 }

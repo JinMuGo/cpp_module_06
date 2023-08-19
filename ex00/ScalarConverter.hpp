@@ -68,7 +68,7 @@ class ScalarConverter {
 	   public:
 		static void printScalar(const t_scalar& scalar, const t_type& type);
 		static void printChar(const char& scalar);
-		static void printFpe(std::string &str, const double& scalar);
+		static void printFpe(std::string& str, const double& scalar);
 	};
 
 	class InvalidInputException : public std::exception {

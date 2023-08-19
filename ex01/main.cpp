@@ -32,8 +32,7 @@ static inline void hexToBin(const std::string& str) {
 	decToBin(n);
 }
 
-void	printData(const Data &data)
-{
+void printData(const Data& data) {
 	std::cout << "Book Data\n" << std::endl;
 	std::cout << "title: " << data.title << std::endl;
 	std::cout << "author: " << data.author << std::endl;
@@ -83,8 +82,8 @@ int main(void) {
 
 	std::cout << RED "\nDeserialized value\n" RESET << std::endl;
 
-	const Data *d_ptr1 = Serializer::deserialize(ptr1);
-	const Data *d_ptr2 = Serializer::deserialize(ptr2);
+	const Data* d_ptr1 = Serializer::deserialize(ptr1);
+	const Data* d_ptr2 = Serializer::deserialize(ptr2);
 
 	printData(*d_ptr1);
 	printData(*d_ptr2);

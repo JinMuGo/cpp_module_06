@@ -12,7 +12,6 @@
 
 #include "Base.hpp"
 
-Base::~Base()
-{
+Base::~Base() {
 	std::cout << BASE_DTOR << std::endl;
 }

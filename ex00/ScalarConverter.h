@@ -13,12 +13,12 @@
 #ifndef SCALARCONVERTER_C
 #define SCALARCONVERTER_C
 
-#include <iostream>
-#include <limits>
+#include <climits>
+#include <cmath>
 #include <cstdlib>
 #include <iomanip>
-#include <cmath>
-#include <climits>
+#include <iostream>
+#include <limits>
 #include "color.h"
 
 #define EPSION 1e-6

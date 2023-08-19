@@ -15,12 +15,10 @@
 
 #include <iostream>
 
-struct Data
-{
+struct Data {
 	std::string title;
 	std::string author;
-	int			date;
+	int date;
 };
-
 
 #endif

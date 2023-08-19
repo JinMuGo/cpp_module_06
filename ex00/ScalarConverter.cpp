@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgo <jgo@student.42seoul.fr>               +#+  +:+       +#+        */
+/*   By: jgo <jgo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 09:04:46 by jgo               #+#    #+#             */
-/*   Updated: 2023/07/20 17:24:26 by jgo              ###   ########.fr       */
+/*   Updated: 2023/08/19 17:53:10 by jgo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void ScalarConverter::error(const t_err err) {
 
 void ScalarConverter::convert(std::string str) {
 	char* endptr = NULL;
-	const double d = strtod(str.c_str(), &endptr); // error handling?
+	const double d = strtod(str.c_str(), &endptr);
 	const t_scalar scalar = {static_cast<char>(d), static_cast<int>(d), static_cast<float>(d), d};
 	const t_type type = ScalarConverter::JudgeType::judgeType(scalar, str, endptr);
 

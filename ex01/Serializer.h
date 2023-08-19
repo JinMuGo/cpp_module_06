@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #ifndef SERIALIZER_H
-# define SERIALIZER_H
+#define SERIALIZER_H
 
+#include <stdint.h>
 #include "Data.hpp"
 #include "color.h"
-#include <stdint.h>
 
 #endif
